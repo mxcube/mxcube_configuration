@@ -362,7 +362,7 @@ configuration:
           strategy_type: diffractcal
           wf_selection: diffractcal
           variants:
-            - advanced
+            - full
             - short
           documentation: |
             Diffractometer calibration.
