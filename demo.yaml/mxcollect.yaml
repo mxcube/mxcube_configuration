@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-class: MultiCollectMockup.MultiCollectMockup
+class: CollectMockup.CollectMockup
 configuration:
   auto_processing:
     program:
