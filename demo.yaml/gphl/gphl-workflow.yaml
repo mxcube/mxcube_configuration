@@ -259,6 +259,7 @@ configuration:
 
         - title: Phasing (SAD)
           strategy_type: phasing
+          short_name: sad
           wf_selection: mxexpt
           variants:
             - advanced
@@ -282,6 +283,7 @@ configuration:
         - title: Two-wavelength MAD
           strategy_type: phasing
           wf_selection: mxexpt
+          short_name: mad2wvl
           variants:
             - basic
             - advanced
@@ -312,6 +314,7 @@ configuration:
         - title: Three-wavelength MAD
           strategy_type: phasing
           wf_selection: mxexpt
+          short_name: mad3wvl
           variants:
             - basic
             - advanced
