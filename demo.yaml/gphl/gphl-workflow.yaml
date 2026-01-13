@@ -34,6 +34,7 @@ configuration:
     # Characterisation strategies popup.
     # names refer to strategies in  strategylib.nml
     characterisation_strategies:
+      - Char_72_6_multitrigger
       - Char_6_5_multitrigger
       - Char_4_by_10
     #   - Characterisation_6_5
