@@ -1,7 +1,23 @@
 ---
 
+sample_list_view_modes:
+  id: sample_list_view_modes
+  components:
+    - id: table_view
+      show: true
+    - id: graphical_view
+      show: true
+
 sample_view:
   id: sample_view
+  components:
+    - attribute: phase_control
+      label: Phase Control
+    - attribute: beam_size
+      label: Beam size
+
+sample_view_motors:
+  id: sample_view_motors
   components:
     - label: Omega
       attribute: diffractometer.phi
@@ -85,7 +101,7 @@ sample_view_video_controls:
       show: true
       show_vspace: false
       show_hspace: true
-    - id: 3_click_centring
+    - id: click_centring
       show: true
     - id: focus
       show: true
