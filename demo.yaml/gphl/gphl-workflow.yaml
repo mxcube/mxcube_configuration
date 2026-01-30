@@ -248,8 +248,8 @@ configuration:
             - advanced
             - minimal
             - basic
-            - ultralong
-            - twotransmission
+#            - ultralong
+#            - twotransmission
           options:
             # Filename pattern name for normal data collections
             pattern: interleaved
@@ -265,7 +265,7 @@ configuration:
           variants:
             - advanced
             - basic
-            - ultralong
+#            - ultralong
           documentation: |
             Single wavelength SAD data acquisition, advanced strategy.
             Aligned on even symetry axes or inverse beam.
