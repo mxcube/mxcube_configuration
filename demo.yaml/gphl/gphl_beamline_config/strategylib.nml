@@ -20,6 +20,7 @@ detector_axis_settings= 470.00
 id= 'lambda_1'
 ! Standard ESRF ID30B wavelength, matching 12.7 keV
 lambda= 0.976
+/
 
 ! # Goniostat settings
 
