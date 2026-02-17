@@ -43,7 +43,7 @@ objects:
   # - harvester: harvester.xml
   # - harvester_maintenance: harvester_maintenance.xml
 
-  - diffractometer: minidiff.yaml
+  - diffractometer: diffractometer_mockup.yaml
   - lims: lims.yaml
   - sample_view: sample_view.yaml
   - queue_manager: queue_manager.yaml
@@ -99,9 +99,10 @@ configuration:
       sub_wedge_size: 10
       # NB 'compression' not added as apparently never used
 
-    helical:
-      # Defaults for helical scan. Missing values are taken from default
-      number_of_images: 100
+      helical:
+        # Defaults for helical scan. Missing values are taken from default
+        number_of_images: 100
+        detector_mode_list: ["0", "C18", "C2"]
 
     characterisation:
       # Defaults for characterisation. Missing values are taken from default
@@ -110,6 +111,7 @@ configuration:
       overlap: -89
       num_images: 4
       shutterless: false
+      detector_mode_list: ["0", "C18", "C2"]
 
     mesh:
       # Defaults for 'advanced' acquisition. Missing values are taken from default

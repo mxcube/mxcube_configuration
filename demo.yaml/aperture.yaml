@@ -2,7 +2,4 @@
 ---
 class: ApertureMockup.ApertureMockup
 configuration:
-  position_list: '["BEAM", "OFF", "PARK"]'
-  username: aperture
-  values: '{"A5": (5, 0.11), "A10": (10, 0.15), "A20": (20, 0.3), "A30": (30, 0.63),
-    "A50": (50, 0.9), "A100": (100, 1)}'
+  diameter_size_list: '[10, 20, 50, 100, 150]'

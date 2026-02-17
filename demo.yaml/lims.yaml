@@ -7,5 +7,5 @@ configuration:
   ws_password: ''
   ws_root: "https://your.lims.org"
   ws_username: ''
-# objects:
-#  lims_rest: lims_rest.yaml
+objects:
+  lims_rest: lims_rest.yaml
