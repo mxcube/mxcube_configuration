@@ -210,7 +210,7 @@ start_deg= 0.0
 !##################### Three orientations; kappa=0,50,118; phi=0 ############
 
 &sdcp_strategy_list
-strategy_name= 'DiffractCal_kappa'
+strategy_name= 'DiffractCal_kappa_only'
 type= 'geometric'
 allowed_widths= 0.05 0.1 0.15 0.2
 default_width_idx= 0
