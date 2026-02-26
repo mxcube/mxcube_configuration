@@ -26,127 +26,127 @@ lambda= 0.976
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k0_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 0.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k0_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 0.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k0_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 0.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k45_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 45.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k45_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 45.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k45_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 45.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k50_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 50.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k50_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 50.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k50_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 50.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k90_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 90.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k90_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 90.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k90_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 90.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k118_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 118.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k118_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 118.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k118_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 118.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k140_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 140.0 0.0
 /
 
 &sdcp_goniostat_setting_list
-id= 'gonio_k140_12p0'
-scan_axis_name= 'phi'
+id= 'gonio_k140_p120'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 140.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k140_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 140.0 240.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k220_p0'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 220.0 0.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k220_p120'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 220.0 120.0
 /
 
 &sdcp_goniostat_setting_list
 id= 'gonio_k220_p240'
-scan_axis_name= 'phi'
+scan_axis_name= 'omega'
 goniostat_axis_settings= 0.0 220.0 240.0
 /
 
@@ -665,8 +665,6 @@ detector_setting_id= 'detector_dist_1'
 beam_setting_id= 'lambda_1'
 start_deg= 180
 length_deg= 60
-/
-
 /
 
 &stratcal_sweep_list
