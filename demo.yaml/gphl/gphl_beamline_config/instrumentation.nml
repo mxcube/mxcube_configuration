@@ -67,7 +67,7 @@ gonio_axis_dirs= 1.0 0.0 0.0,
    1.0 0.0 0.0
 gonio_axis_datum_settings= 0 0 0
 gonio_axis_limits= , , -8, 256, , ,
-gonio_axis_names= 'phi' 'kappa' 'kappa_phi'
+gonio_axis_names= 'omega' 'kappa' 'kappa_phi'
 gonio_axis_scannable= 'True' 'False' 'False'
 gonio_axis_calibratable= 'False' 'True' 'True'
 
