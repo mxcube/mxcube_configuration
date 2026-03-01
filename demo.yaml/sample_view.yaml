@@ -2,7 +2,7 @@
 ---
 class: SampleView.SampleView
 configuration:
-  centring_motors: ["omega", "phiy", "phiz", "sampx", "sampy"]
+  centring_motors: ["omega", "kappa", "kappa_phi", "phiy", "phiz", "sampx", "sampy"]
   motor_directions: {"phiy": -1}
   centring_reference_position: {"phiz": 0.099}
   rotation_reference: {"name": "phiz", "script": "Change_AlignmentZ"}
