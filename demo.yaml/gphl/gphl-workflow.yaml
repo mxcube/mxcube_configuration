@@ -101,6 +101,7 @@ configuration:
       # exposure time (s). NB automatically reset to be within limits for detector
       exposure_time: 0.01
       # Default use known cell parameters as forced starting point for processing
+      # It is recommended to keep setting to false, as it should only eb used with reliable cells
       use_cell_for_processing: false
       # Maximum dose budget to propose when converting from resolution, in MGy
       maximum_dose_budget: 20
