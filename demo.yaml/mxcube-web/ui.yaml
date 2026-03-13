@@ -69,13 +69,13 @@ sample_view_motors:
       suffix: mm
     - label: Sample Horizontal
       attribute: diffractometer.phiz
-      role: sample_focus
+      role: sample_horizontal
       step: 0.1
       precision: 3
       suffix: mm
     - label: Sample Vertical
       attribute: diffractometer.phiy
-      role: sample_lateral
+      role: sample_vertical
       step: 0.1
       precision: 3
       suffix: mm
