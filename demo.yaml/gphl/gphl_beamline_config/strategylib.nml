@@ -189,6 +189,25 @@ length_deg= 1.2
 start_deg= 0.0
 /
 
+! ################### 4deg/4 characterisation strategy
+
+&sdcp_strategy_list
+strategy_name= 'Char_4_by_10_multitrigger'
+type= 'geometric'
+allowed_widths= 0.1
+default_width_idx= 0
+/
+
+&stratcal_sweep_list
+repeat= 4
+offset= 90.0
+goniostat_setting_id= 'gonio_k0_p0'
+detector_setting_id= 'detector_dist_1'
+beam_setting_id= 'lambda_1'
+length_deg= 1.0
+start_deg= 0.0
+/
+
 ! ################### One 24deg sweep
 
 &sdcp_strategy_list
