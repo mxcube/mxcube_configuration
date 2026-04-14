@@ -28,6 +28,12 @@ configuration:
       - 72
       - 360
 
+    processing_macros:
+      - LowResOrTricky
+      - SmallMolecules
+      - ReportingInlined
+      - SlippingCrystal
+
     # tolerance for deciding whether angles differ, in degrees;
     # used to compare kappa and phi to decide if orientations needs separate centring
     angular_tolerance: 1.0
