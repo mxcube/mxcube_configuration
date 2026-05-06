@@ -205,10 +205,10 @@ configuration:
       #        co.gphl.wf.run_number: 7
 
       # Enable mosaicity estimation (default: false). Activates XDS integration of characterisation data.
-      co.gphl.wf.estMosaicity: true
+      co.gphl.wf.estMosaicity: false
       # Fork XDS in separate process (default: false)
       # only works when XDS is invoked directly, rather than through a wrapper
-      co.gphl.wf.forkxds: true
+      co.gphl.wf.forkxds: false
 
       # To enable the dumping of messages and payloads by the workflow.
       # The messages/payloads will be written into a numbered subdirectory
