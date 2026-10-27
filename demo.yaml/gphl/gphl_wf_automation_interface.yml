@@ -100,7 +100,7 @@ task:
         use_dose: 20.0  # (MGy) NB Optional, for entire experiment.
         # Defaults to calculated dose budget. Resets transmission, exposure time
         transmission: 80.0  # (%) NB Optional  Overrides use_dose.
-        # Defaults to current valuee if init_spot_dir is set
+        # Defaults to current value if init_spot_dir is set
         # Otherwise is set from dose budget and resolution.
         # If set this value will reset the dose budget
         # Strategy variant
