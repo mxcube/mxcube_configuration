@@ -2,60 +2,126 @@
 ---
 
 ### Calling interface (for automation)
-# This section is specific to the automated MXCuBE-web version, intended for MASSIF-1.
+# This file is specific to the automated MXCuBE version, first set up for MASSIF-1.
 # It shows the interfaces between the Global Phasing workflow and a calling
 # automation program running through MXCuBE,.
 
-# Adding a GPhL workflow is done in the same way as adding an EDNA workflow.
-# The parameters are a node ID and a task dictionary.
-# The parameters relevant for GPhL  are, in yaml notation:
+# Adding a GPhL workflow is done by creating a GphlWorkflow queue model object
+# passing the task["parameters"] dictionary as in this file to the init_from_task_data()
+# function,and adding the result to the queue, as in XMLRPCServer.add_gphl_workflow()
 
 task:
 
   parameters:
-    # Process control and ???
-    wfpath: Gphl  # Mandatory – specifies  GPhL workflow
-    automation_mode: MASSIF1  # Optional,  defaults to None (manual)
-    shape: some_shape_name  # Used for EDNA workflow, I do not know  what for
+    # Most parameters are set from defaults or the Sample object, but these values
+    # override the defaults
 
-    # Strategy control
+    # Process and strategy control
+    wfpath: Gphl  # Mandatory for mxcubeweb – specifies GPhL workflow
     strategy_name: "Native data collection"  # (str) Mandatory.
     # Options are: ‘Native data collection’, ‘SAD Phasing’
     # ‘Two-wavelength MAD’, ‘Three-wavelength MAD’, ‘Diffractometer calibration’
+    # strategy variant (advanced, basic or minimal for Native, advanced for phasing)
+    # Determines the strategy variant to execute (default: advanced)
+    # It is equivalent to setting 'strategy' for the second auto_acq_parameters.
+    # but it makes more sense to set it here at the top with other key parmeters.
+    strategy_variant: advanced
+    # Switch for auto / manual mode
+    automation_mode: MASSIF1  # Optional,  defaults to None (manual)
+    # init_spot_dir: switch for using preacquired and pre-calculated charactersation data
+    # If set the directory must contain a SPOTS.XDS file matching the characterisation
+    # and the parameters describing teh characterisation, including the characterisation
+    # must correctly describe the characterisation as executed.
+    init_spot_dir: "/where/ever/dict" # Directory containing precalculated SPOTS.XDS file
+
+    # Key parameters: Default to current settings, but should be controlled.
+    # For multi-wavelength experiments (MAD) the energies list can be set in the
+    # second set of auto_acq_parameters
+    energy: 12.398      # Beam energy in keV
+    # Resolution is used to set detector distance for characterisation and experiment
+    resolution: 1.7     # resolution in Angstrom
+
+    # Sample-related parameters.
+    # All are optional but serve to improve selection of indexing solution,
+    # or calculation of dose budget (relative_rad_sensitivity, crystal_thickness)
+    # They should be included where known.
+    # Space group and unit cell are frequently passed in via the Sample queue object
+    #
+    # Space group name. Also accepts synonyms, such as
+    # "P 2 2 21", "P2212", "P 2 21 2", "P2122", "P 21 2 2")
+    space_group: P2221
+    # Arithmetic crystal classes expected for the symmetry.
+    # Alternative specification of crystal symmetry that allows specifying ambiguous
+    # or partial symmetry information.
+    # Space_group and crystal_classes are mutually exclusive
+    crystal_classes:
+      - 4I
+      - 422I
+    unit_cell:
+      # Unit cell parameters. Used for display and (in future) choosing indexing solution
+      cell_a: 50.0
+      cell_b: 60.0
+      cell_c: 70.0
+      cell_alpha: 90.0
+      cell_beta: 90.0
+      cell_gamma: 90.0
+    # Radiation sensitivity relative to standard protein crystal at intended wavelength
+    # Optional, defaults to 1.0
+    relative_rad_sensitivity: 1.0
+    # Crystal thickness orthogonal to rotation axis. Used for determining
+    # dose budget and transmission setting
+    # in cases where the crystal is larger than the beam. Default to 0.0 (unused)
+    crystal_thickness: 0.0
+
 
     # directory and file names. All optional, default to session default
     # See File Locations in manual
     prefix: <path_template.base_prefix>  # (str)
     suffix: <path_template.suffix>  # (str) Optional
     subdir: <Image path subdirectory>  # (str) Optional
+    # Protein acronym determining file names etc. Normally set via Queue sample
+    protein_acronym: 4k61
 
-    # Optional, overriding configured defaults:
-    decay_limit: 25  # (%).
+    # Sem to be used in the web version, for EDNA for some unknown purpose
+    shape: some_shape_name  # Used for EDNA workflow, I do not know  what for
+
+    # Basic default parameters. Should be set once and for all in workflow configuration,
+    # But can be overridden here
     # Minimum % intensity remaining at target resolution using recommended dose budget
+    decay_limit: 25  # (%).
     # dose_budget = 2 * resolution**2 * log(100. / decay_limit) / relative_sensitivity
     maximum_dose_budget: 20  # (MGy). Maximum when calculating budget from resolution
     characterisation_budget_fraction: 0.05  # dose fraction used for characterisation
-#    crystal_thickness: 0  # Minimum crystal thickness (in µ), used for dose calculation with beams narrower than crystal
-    # Use known cell parameters as forced starting point for processing
-    # Should only be set to true with reliable cells and spacegroups
-    use_cell_for_processing: false
 
-    # Strategy name, matching strategylib.nml.
+    # auto_acq_parameters are used as input for characterisation or diffractcal
+    # (first element) and for actual acquisition (second element).
+    # If there is only one dictionary in teh list, it applies to both
+    # characterisation and acquisition
+    #
+    # The default values are set in gphl-workflow: configuration:settings:defaults
+    # and :auto_acq_parameters and it is recommended to rely on the
+    # configured values except for specific changes.
+    # auto_acq_parameters can be omitted if there are no changes.
+    #
+    # The parameter dictionaries are passed to both set_pre_strategy_params
+    # and set_pre_acquisition_params in queue_model_objects.GphlWorkflow,
+    # which define the total set of possible parameters.
+    # Additionally the parameters 'transmission' and 'use_dose'
+    # are passed to the GphlWorkflow.setup_data_copllection function,
+    # where they serve to define the transmission (f both are set,
+    # transmission takes priority).
+    # If the beamline has a functional Flux hardware object so that the flux can
+    # be queried it is strongly recommended NOT to set eithee transmission or
+    # use_dose, but to rely on the automatic transmission determination
+    # of the workflow.
     auto_acq_parameters:  # (list of dict) automation parameters for acquisitions.
       # Optional.
-      # The standard workflows have two acquisitions, characterisation and main;
-      # diffractometer calibration has only one, and future workflows may have more.
-      # The dictionaries are applied to the acquisitions in order;
-      # if there is only one dictionary in the list, it applies to all acquisitions.
-      # The following appear in task dictionaries in interactive MXCuBE3,
-      # but are NOT used by the  GPhL workflow: wfname, wftype, strategies, type
-
-      # The first dictionary are the parameters needed for MASSIF1 characterisation
-      # where characterisation and first XDS run are done BEFORE starting the workflow
-      # init_spot_dir can be set ONLY for characterisation
       # init_spot_dir, if set, turns off the workflow-driven characterisation
       # resolution, energies, and transmission are taken from the current values
       # in this case unless explicitly set
+      # The first dictionary are the parameters needed for MASSIF1 characterisation
+      # where characterisation and first XDS run are done BEFORE starting the workflow
+      # init_spot_dir can be set ONLY for characterisation
       - exposure_time: 0.04  # (s) Optional, default configured.
         # Mandatory if init_spot_dir is set
         image_width: 0.1    # (°) Optional, default configured.
@@ -63,37 +129,28 @@ task:
         # use_dose: 20.0 # (MGy) Total dose. Optional. Overrides dose budget
         # transmission: 100.0 # (%) Optional  Overrides use_dose.
         # Defaults to current value if init_spot_dir is set
-        init_spot_dir: "/where/ever/dict"   # Directory containing SPOTS.XDS file
-        # from preliminary XDS calculation
         # When init_spot_dir is set, strategy must be the name of the strategy
         # (specified in strategylib.nml) that was actually used for characterisation.
         strategy: "Char_6_5_multitrigger"
-        # Optional: Arithmetic crystal classes expected for the symmetry.
-        # Will be used to select a matching indexing solution,
-        # and to determine acquisition strategy.
-        # If no matching indexing solution is found, these will be ignored.
-        # Must be given in first (characterisation) set of auto_acq_parameters
-        # crystal_classes:
-        #   - 4I
-        #   - 422I
         # Pass input cell and symmetry to XDS and processing and force their use as
         # starting point. Used to override XDS cell, symmetry determination
+        # Should only be set to true with reliable cells and spacegroups
         use_cell_for_processing: false
 
       # acquisition parameters, for successive steps (characterisation or main).
       # This example lists all options, for documentation purposes
       # All are optional (except when init_spot_dir is set) and should normally
       # be left empty so the default is used.
-      - resolution: 1.7  # (Å) Optional. Defaults to current value,
-        # or to diffraction plan aimed_resolution
-        energies: [12.4]  # list(keV) List of energies to use in experiment.
-        # two or three for MAD (only).
-        # First wavelength will be used for calculating strategies, dose budget, etc.
-        # Optional, except for MAD - will default to current beamline energy.
-        exposure_time: 0.04  # (s) Optional, default configured.
+      - exposure_time: 0.04  # (s) Optional, default configured.
         # Mandatory if init_spot_dir is set
         image_width: 0.1  # (°) Optional, default configured.
         # Mandatory if init_spot_dir is set
+        energies:  # list(keV) List of energies to use in experiment.
+          - 12.4
+          - 12.408
+        # Two or three values,optional, to be used for MAD experiments only.
+        # The first wavelength should be equal to the energy set earlier,
+        # which was the one used for calculating strategies, dose budget, etc.
         wedge_width: 30.0  # (°) Wedge width (for interleaving)
         #  Optional, default configured.
         snapshot_count: 2  # Optional, default configured.
@@ -102,7 +159,7 @@ task:
         transmission: 80.0  # (%) NB Optional  Overrides use_dose.
         # Defaults to current value if init_spot_dir is set
         # Otherwise is set from dose budget and resolution.
-        # If set this value will reset the dose budget
+        # If set this value will reset use_dose
         # Strategy variant
         # Default is “basic” for MAD, “advanced” for native or SAD
         strategy: advanced
@@ -110,6 +167,7 @@ task:
         repetition_count: 1
         # Pass input cell and symmetry to XDS and processing and force their use as
         # starting point. Used to override XDS cell, symmetry determination
+        # Should only be set to true with reliable cells and spacegroups
         use_cell_for_processing: false
 
         strategy_options:  # (dict) strategy calculation parameters. See below
@@ -120,17 +178,9 @@ task:
           angular_tolerance: 1.0  # (°) Optional.
           # Tolerance to distinguish strategy orientations
 
-# Other parameters are set (ultimately) from ISPyB. These are all optional:
-# From crystal description:
-#   unit cell  parameters
-#   space_group,protein_acronym
-# From diffraction plan:
-#   radiation_sensitivity
-#   aimed_resolution # Defaults to current resolution.
-#   Serves a default for acquisition parameter resolution (see above)
 
 # NB By default transmission is calculated by program to match the calculated dose
 # budget, which ultimately depends on the beamline flux density, aimed resolution,
 # energy, and beam size.(see parameters ‘decay_limit’ and ‘maximum_dose_budget’
-# above. It is recommended not to set transmission or dose_budget explicitly
+# above. It is strongly recommended not to set transmission or dose_budget explicitly
 # (unless init_spot_dir is set) but to rely on the automatic transmission setting.
