@@ -59,12 +59,12 @@ task:
       - 422I
     unit_cell:
       # Unit cell parameters. Used for display and (in future) choosing indexing solution
-      cell_a: 50.0
-      cell_b: 60.0
-      cell_c: 70.0
-      cell_alpha: 90.0
-      cell_beta: 90.0
-      cell_gamma: 90.0
+    cell_a: 50.0
+    cell_b: 60.0
+    cell_c: 70.0
+    cell_alpha: 90.0
+    cell_beta: 90.0
+    cell_gamma: 90.0
     # Radiation sensitivity relative to standard protein crystal at intended wavelength
     # Optional, defaults to 1.0
     relative_rad_sensitivity: 1.0
@@ -160,9 +160,6 @@ task:
         # Defaults to current value if init_spot_dir is set
         # Otherwise is set from dose budget and resolution.
         # If set this value will reset use_dose
-        # Strategy variant
-        # Default is “basic” for MAD, “advanced” for native or SAD
-        strategy: advanced
         # Number of repetitions of entire strategy
         repetition_count: 1
         # Pass input cell and symmetry to XDS and processing and force their use as
