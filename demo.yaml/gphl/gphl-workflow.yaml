@@ -140,7 +140,7 @@ configuration:
         #   - 222I
         # space_group: I222
       - exposure_time: 0.02
-        image_width: 1.0
+        image_width: 0.1
         snapshot_count: 2
         wedge_width: 24.0
 #        strategy: advanced  # default is 'advanced'. normally set explicitly
