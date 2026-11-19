@@ -10,10 +10,8 @@
 
 &sdcp_detector_setting_list
 id= 'detector_dist_1'
-!detector_axis_settings= 291.0
-!detector_axis_settings= 260.96
-! Matches 2.3A resolution at 1.0A wavelength
-detector_axis_settings= 470.00
+! This gets overridden anyway, but as a starting value ...
+detector_axis_settings= 250.00
 /
 
 &beam_setting_list
